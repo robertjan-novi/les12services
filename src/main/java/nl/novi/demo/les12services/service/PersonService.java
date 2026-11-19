@@ -8,6 +8,9 @@ import nl.novi.demo.les12services.model.Person;
 import nl.novi.demo.les12services.repository.PersonRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class PersonService {
 
@@ -30,5 +33,14 @@ public class PersonService {
                 .orElseThrow(() -> new ResourceNotFoundException("Person not found!"));
 
         return PersonMapper.toResponseDto(person);
+    }
+
+    public List<PersonResponseDto> getAllPersons() {
+        List<Person> persons = repos.findAll();
+
+        return persons
+                .stream()
+                .map(PersonMapper::toResponseDto)
+                .collect(Collectors.toList());
     }
 }

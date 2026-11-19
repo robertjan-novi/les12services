@@ -24,11 +24,11 @@ public class PersonController {
         this.service = service;
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<Person>> getPersons() {
-//        List<Person> persons = this.repos.findAll();
-//        return ResponseEntity.ok(persons);
-//    }
+    @GetMapping
+    public ResponseEntity<List<PersonResponseDto>> getPersons() {
+        List<PersonResponseDto> persons = this.service.getAllPersons();
+        return ResponseEntity.ok(persons);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<PersonResponseDto> getPersonById(@PathVariable int id) {
